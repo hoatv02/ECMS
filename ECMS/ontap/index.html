@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <form action="">
+        String<input type="text" id="names" value="FPTPOLYTECHNIC">
+        Nummber <input type="text" id="numbers">
+        <button id="button">Submit</button>
+        <h5 id="title"></h5>
+    </form> -->
+    <!-- <button id="button">Bấm đi</button> -->
+    <script>
+        var arr = [3, 4, -1, 5, 9, 7, 8, 1]
+        var sort = arr.sort((a, b) => {
+            return a - b
+        })
+        var filter = arr.filter((value) => {
+            return value > 5
+        })
+        let bubbleSort = (inputArr) => {
+            let len = inputArr.length;
+            for (let i = 0; i < len; i++) {
+                for (let j = 0; j < len; j++) {
+                    if (inputArr[j] > inputArr[j + 1]) {
+                        let tmp = inputArr[j];
+                        inputArr[j] = inputArr[j + 1];
+                        inputArr[j + 1] = tmp;
+                    }
+                }
+            }
+            return inputArr;
+
+        };
+        bubbleSort()
+        // Cắt chuỗi theo number
+        // const $ = document.querySelector.bind(document);
+        // const $$ = document.querySelector.bind(document);
+        // const name = $('#names')
+        // const number = $('#numbers')
+        // const title = $('#title')
+        // const button = $('#button')
+        // button.onclick=(e)=>{
+        //     e.preventDefault();
+        //     var newName = name.value.slice(0,number.value)
+        //     if(number.value <= name.value.length){
+        //         title.innerHTML = newName + '...';
+        //     }else{
+        //         title.innerHTML = newName + '.';
+        //     }
+        // }
+
+        // Loại bỏ các chữ cái thường
+        // const button = $('#button')
+        // const regex = /[a-z]/g
+        // const str = 'FPTpoly'
+        // const result = str.replace(regex,'*')
+        // button.onclick=()=>{
+        //     console.log(result)
+        // } 
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 1</title>
+</head>
+
+<body>
+    <h5>Bài 1: Tạo đối tượng sinhvien bằng phương pháp Object
+        Literals.</h5>
+    <div class="info"></div>
+    <script>
+        const infos = document.querySelector('.info')
+        function sinhVien(id, fullName, email, avatar, address, study_major, avgScore) {
+            this.id = id,
+                this.fullName = fullName,
+                this.email = email,
+                this.avatar = avatar,
+                this.address = address,
+                this.study_major = study_major,
+                this.avgScore = avgScore,
+                this.render = function () {
+                    infos.innerHTML = `${avatar},${fullName}`
+                }
+                 this.getAvgScore = function () {
+                return this.avgScore
+                }
+                this.setAvgScore = function (point) {
+                    this.avgScore = point
+                }
+                this.changeAddress = function (address) {
+                    this.address = address
+                }
+            }
+        const info = new sinhVien(1, 'Hòa trần', 'Vui vẻ', 'Javascript', 'Hanoi', 'Viet Nam', 'ok')
+        info.render()
+    </script>
+</body>
+
+</html>

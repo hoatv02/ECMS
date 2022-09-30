@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 3</title>
+</head>
+
+<body>
+    <h5>Bài 3 : Tạo đối tượng bằng phương pháp Object constructor
+        functions</h5>
+    <script>
+        function student(name, age, address, phone, birthday, subjects) {
+            this.name = name;
+            this.age = age;
+            this.address = address;
+            this.phone = phone;
+            this.birthday = birthday;
+            this.subjects = subjects;
+        }
+        function studentPoly(name, age, address, phone, birthday, subjects) {
+            student.call(this, name, age, address, phone, birthday, subjects);
+            this.getAvgScore = function () {
+                let sum = 0;
+                this.subjects &&
+                    this.subjects.forEach((element) => {
+                        sum += sum + element.point;
+                    });
+                return sum / this.subjects.length;
+            };
+            this.changeAddress = function (address) {
+                this.address = address;
+            };
+        }
+        var st = new studentPoly("Hòa Trần", 24, "Hà Nội", "0987654321", "1/11/2002", [
+            {
+                name: "HTML",
+                point: 8
+            },
+            {
+                name: "JS Basic",
+                point: 7
+            },
+            {
+                name: "JS Advanced",
+                point: 6
+            }
+        ]);
+        console.log(st);
+        console.log(st.getAvgScore().toFixed());
+
+    </script>
+</body>
+
+</html>

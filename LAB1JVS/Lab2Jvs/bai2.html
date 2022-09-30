@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 2</title>
+</head>
+
+<body>
+    <h5>Bài 2: Luyện tập truy xuất đối tượng</h5>
+    <form action="">
+        <div class="form-control">
+            <label for="">Subject Name</label>
+            <input type="text" name="string" value="" id="nameSub">
+        </div>
+        <div class="form-control">
+            <label for="">Point</label>
+            <input type="number" name="number" value="" id="pointSub">
+        </div>
+        <div class="form-control">
+            <button type="submit" id="button">ADD</button>
+        </div>
+        <div id="show">
+
+        </div>
+        <script>
+            const subjects = document.getElementById("subjects");
+            const button = document.getElementById("button")
+            const name = document.getElementById("name")
+            const age = document.getElementById("age")
+            const address = document.getElementById("address")
+            const show = document.getElementById("show")
+            const nameSub = document.getElementById("nameSub")
+            const pointSub = document.getElementById("pointSub")
+            var student = {
+                name: 'Nguyễn Văn Anh',
+                age: 20,
+                address: 'Hà Giang',
+                subjects: [
+                    // {
+                    //     name: '',
+                    //     point: ''
+                    // }
+                ],
+            }
+            const infoSub = student.subjects.map((sub) => {
+                return (`
+                <p>Tên môn học : ${sub.name}</p>
+                <p>Điểm : ${sub.point}</p>
+
+            `)
+            })
+            const infor = `
+            <p>Tên : ${student.name}</p>
+            <p>Tuổi : ${student.age}</p>
+            <p>Địa chỉ : ${student.address}</p>
+            <p>${infoSub.join('')}</p>
+        `
+            // show.innerHTML = infor
+
+            button.onclick = (e) => {
+                e.preventDefault();
+                student.subjects.push({ name: nameSub.value, point: pointSub.value })
+                const infoSub = student.subjects.map((sub) => {
+                    return (`
+                <p>Tên môn học : ${sub.name}</p>
+                <p>Điểm : ${sub.point}</p>
+
+            `)
+                })
+                const infor = `
+            <p>Tên : ${student.name}</p>
+            <p>Tuổi : ${student.age}</p>
+            <p>Điạ chỉ : ${student.address}</p>
+            <p>${infoSub.join('')}</p>
+        `
+                show.innerHTML = infor
+                console.log(student)
+            }
+        </script>
+</body>
+
+</html>

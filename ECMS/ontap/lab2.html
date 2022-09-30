@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .notifys {
+            color: red;
+        }
+        .button{
+            background-color: red;
+            border: none;
+        }   
+        
+    </style>
+</head>
+
+<body>
+    <form action="" id="forms">
+        <div class="form-group">
+            <input type="text" class="form-control" id="nameTour" placeholder="Name Tour">
+            <div class="notify"></div>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="idTour" placeholder="ID Tour">
+            <div class="notify"></div>
+        </div>
+        <div class="form-group">
+            <select class="form-control" name="" id="selectTour">
+                <option></option>
+                <option value="1">New Delhi</option>
+                <option value="2">Istanbul</option>
+                <option value="3">Jakarta</option>
+            </select>
+            <div class="notify"></div>
+        </div>
+        <div class="form-group" id="genderRadio">
+            <label for="">Nam</label><input type="radio" name="gender" id="gender" value="1">
+            <label for="">Nữ</label><input type="radio" name="gender" id="gender" value="2">
+            <div class="notifys"></div>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="quantity" placeholder="Number of people ">
+            <div class="notify"></div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn">Đăng kí</button>
+        </div>
+    </form>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <td>Tên Tour</td>
+                <td>Mã Tour</td>
+                <td>Đơn vị tổ chức</td>
+                <td>Giới tính</td>
+                <td>Số người đi cùng</td>
+                <td>Hành động</td>
+            </tr>
+        </thead>
+        <tbody class="show">
+
+        </tbody>
+    </table>
+    <script>
+        const $ = document.querySelector.bind(document)
+        const $$ = document.querySelectorAll.bind(document)
+        const nameTour = $('#nameTour')
+        const idTour = $('#idTour')
+        const selectTour = $('#selectTour')
+        const gender = $$('#gender')
+        const genderRadio = $('#genderRadio')
+        const quantity = $('#quantity')
+        const button = $('.btn')
+        const notify = $$('.notify')
+        const show = $('.show')
+        const notifys = $('.notifys')
+        const isRequired = (value) => {
+            return value && value.trim() === "" || value === "" ? true : false;
+        };
+        var object = {}
+        var arr = []
+        var shows = '';
+        button.onclick = (e) => {
+            e.preventDefault();
+            if (isRequired(nameTour.value)) {
+                nameTour.parentElement.childNodes[3].innerHTML = 'Vui lòng nhập tên tour !'
+                nameTour.parentElement.childNodes[3].style.color = 'red'
+            } else if (nameTour.value.length < 10) {
+                nameTour.parentElement.childNodes[3].innerHTML = 'Tên tour tối thiểu 10 kí tự !'
+
+            } else {
+                nameTour.parentElement.childNodes[3].innerHTML = ''
+            }
+
+
+            if (isRequired(idTour.value)) {
+                idTour.parentElement.childNodes[3].innerHTML = 'Vui lòng nhập mã tour !'
+                idTour.parentElement.childNodes[3].style.color = 'red'
+            } else if (idTour.value.length <= 5) {
+                idTour.parentElement.childNodes[3].innerHTML = 'Mã tour tối thiểu 5 kí tự !'
+
+            } else {
+                idTour.parentElement.childNodes[3].innerHTML = ''
+            }
+
+            if (selectTour.value == '') {
+                selectTour.parentElement.childNodes[3].innerHTML = 'Vui lòng chọn đơn vị tổ chức !'
+                selectTour.parentElement.childNodes[3].style.color = 'red'
+            } else {
+                selectTour.parentElement.childNodes[3].innerHTML = ''
+            }
+
+            if (quantity.value == '') {
+                quantity.parentElement.childNodes[3].innerHTML = 'Vui lòng nhập sô lượng !'
+                quantity.parentElement.childNodes[3].style.color = 'red'
+            } else {
+                quantity.parentElement.childNodes[3].innerHTML = ''
+            }
+            console.log(genderRadio.parentElement.childNodes[5])
+            var selectValue = document.querySelector('input[name="gender"]:checked');
+            if (selectValue != null) {
+                selectValue.value
+                notifys.innerHTML = ''
+            }
+            else {
+                notifys.innerHTML = 'Vui lòng chọn giới tính !'
+            }
+            // console.log(show)
+            const isSucces = Array.from(notify).every(function (call) {
+                return call.innerText === ''
+            })
+            if (isSucces) {
+                object = {
+                    nameTour: nameTour.value,
+                    idTour: idTour.value,
+                    selectTour: selectTour.value,
+                    gender: selectValue.value,
+                    quantity: quantity.value,
+                };
+                arr = [...arr, object]
+                console.log(object)
+                render(arr)
+            }
+
+        }
+        function deleteItems(index) {
+                arr.splice(index, 1)
+                render(arr)
+            }
+        function render(arrays) {
+            show.innerHTML = arrays.map((items, index) => {
+                return (`
+                    <tr>
+                        <td>${items.nameTour}</td>
+                        <td>${items.idTour}</td>
+                        <td>${items.selectTour}</td>
+                        <td>${items.gender == 1 ? 'Male' : 'Female'}</td>
+                        <td>${items.quantity}</td>
+                        <td><button onclick="deleteItems(${index})" class='button'>Xóa</button></td>
+                    </tr>`)
+            }).join(' ')
+        }
+
+    </script>
+</body>
+
+</html>

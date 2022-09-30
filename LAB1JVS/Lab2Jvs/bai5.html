@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 5</title>
+    <style>
+        .mess-err{
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <form action=""  class="elForm5">
+        <label for="">Tên món ăn</label>
+        <input type="text" id="nameFood" />
+        <div class="mess-err" id="name-food-err"></div>
+        <label for="">Số lượng</label>
+        <input type="tel" id="numberFood" />
+        <div class="mess-err" id="number-food-err"></div>
+        <label for="">Loại đồ ăn</label>
+        <select class="form-select" id="typeFood">
+            <option selected value="">Chọn loại món ăn</option>
+            <option value="1">Tráng miệng</option>
+            <option value="2">Nước uống</option>
+            <option value="3">Khai vị</option>
+        </select>
+        <div class="mess-err" id="type-food-err"></div>
+        <button>Add</button>
+    </form>
+    <table class="show5" border="1">
+        <tr>
+            <th>Stt</th>
+            <th>Tên món ăn</th>
+            <th>Số lượng</th>
+            <th>Loại đồ ăn</th>
+        </tr>
+    </table>
+    <script>
+        var elForm5 = document.querySelector(".elForm5");
+        const elShow5 = document.querySelector(".show5");
+            let index = 0;
+            elForm5.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var valueNameFood = document.getElementById("nameFood");
+            var valueNumberFood = document.getElementById("numberFood");
+            var valueTypeFood = document.getElementById("typeFood");
+            var params = {
+                valueNameFood,
+                valueNumberFood,
+                valueTypeFood
+            };
+            // console.log(isValidation(params));
+            if (!isValidation(params)) return;
+            index++;
+            const elRender = document.createElement("tr");
+            elRender.innerHTML = `
+            <td>${index}</td>
+            <td>${valueNameFood.value}</td>
+            <td>${valueNumberFood.value}</td>
+            <td>${renderHtmlTypeFood(valueTypeFood.value)}</td>`;
+            elShow5.appendChild(elRender);
+        });
+
+        function renderHtmlTypeFood(value) {
+            if (value === "1") return "Tráng miệng";
+            else if (value === "2") return "Nước uống";
+            else if (value === "3") return "Khai vị";
+        }
+
+        function isValidation(params) {
+            let isFlag = true;
+            const { valueNameFood, valueNumberFood, valueTypeFood } = params;
+            if (valueNameFood.value.length === 0) {
+                isFlag = false;
+                showErr("name-food", "Không được để trống");
+            } else if (valueNameFood.value.length < 5) {
+                isFlag = false;
+                showErr("name-food", "Tối thiếu 6 ký tự");
+            } else {
+                isFlag = true;
+                showErr("name-food", "");
+            }
+            if (valueTypeFood.value.length === 0) {
+                isFlag = false;
+                showErr("type-food", "Không được để trống");
+            } else {
+                isFlag = true;
+                showErr("type-food", "");
+            }
+            if (valueNumberFood.value.length === 0) {
+                isFlag = false;
+                showErr("number-food", "Không được để trống");
+            } else if (isNaN(valueNumberFood.value)) {
+                isFlag = false;
+                showErr("number-food", "Số lượng phải là số");
+            } else if (Number(valueNumberFood.value) < 0) {
+                isFlag = false;
+                showErr("number-food", "Số lượng phải là số dương");
+            } else {
+                isFlag = true;
+                showErr("number-food", "");
+            }
+
+            return isFlag;
+        }
+        function showErr(key, strMess) {
+            document.getElementById(`${key}-err`).innerHTML = strMess;
+        }
+
+    </script>
+</body>
+
+</html>

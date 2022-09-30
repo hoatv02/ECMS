@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">
+            <h3>Đăng Kí Tour</h3>
+        </div>
+        <form action="" id="form">
+            <div class="from-control">
+                <input type="text" name="" id="nameTour" placeholder="Tên tour">
+                <div class="notify"></div>
+            </div>
+
+            <div class="from-control">
+                <input type="text" name="" id="idTour" placeholder="Mã tour">
+                <div class="notify"></div>
+            </div>
+
+            <div class="from-control">
+                <select name="" id="selectTour">
+                    <option value="">Đơn vị tổ chức</option>
+                    <option value="1">Việt Nam</option>
+                    <option value="2">Thái Lan</option>
+                </select>
+                <div class="notify"></div>
+            </div>
+
+            <div class="from-control" >
+                <input type="radio" name="gender" id="gender" value="1"><label for="Nam">Nam</label>
+                <input type="radio" name="gender" id="gender" value="2"><label for="Nữ">Nữ</label>
+                <div class="notify"></div>
+            </div>
+
+            <div class="from-control">
+                <input type="number" name="" id="quantity" placeholder="Số người đi cùng">
+                <div class="notify"></div>
+            </div>
+
+            <div class="form-control">
+                <button type="submit" id="btn">Đăng kí</button>
+            </div>
+        </form>
+        <div class="table">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <td>Tên Tour</td>
+                        <td>Mã Tour</td>
+                        <td>Đơn vị tổ chức</td>
+                        <td>Giới Tính</td>
+                        <td>Số người đi cùng</td>
+                        <td>Hành Động</td>
+                    </tr>
+                </thead>
+                <tbody id="show">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+
+        const $ = document.querySelector.bind(document)
+        const $$ = document.querySelectorAll.bind(document)
+        const nameTour = $('#nameTour')
+        const idTour = $('#idTour')
+        const selectTour = $('#selectTour')
+        const male = $('#male')
+        const female = $('#female')
+        const quantity = $('#quantity')
+        const btn = $('#btn')
+        const notify = $$('#notify')
+        const form = $('#form')
+        const table = $('.table')
+        const show = $('#show')
+        const isRequired = (value) => {
+            return value && value.trim() === "" || value === "" ? true : false;
+        };
+
+        var object = {};
+        var arr = [];
+        btn.onclick = (e) => {
+
+
+
+            e.preventDefault();
+            var getSelectedValue = document.querySelector('input[name="gender"]:checked');
+            if (getSelectedValue != null) {
+                getSelectedValue.value
+            }
+            else {
+                document.write("Nothing has been selected");
+            }
+                if (isRequired(nameTour.value) || isRequired(idTour.value) || isRequired(selectTour.value)) {
+                    nameTour.parentElement.childNodes[2].innerHTML = 'Vui lòng nhập tên Tour'
+                    idTour.parentElement.childNodes[2].innerHTML = 'Vui lòng nhập mã Tour'
+                    nameTour.parentElement.childNodes[2].style.color = 'red'
+                    idTour.parentElement.childNodes[2].style.color = 'red'
+                    selectTour.parentElement.childNodes[3].innerHTML = 'Vui lòng chọn đơn vị tổ chức'
+                    selectTour.parentElement.childNodes[3].style.color = 'red'
+                    // quantity.parentElement.childNodes[2].innerHTML = 'Vui lòng nhập số lượng'
+                    // quantity.parentElement.childNodes[2].style.color = 'red'
+                    return;
+                } else {
+                    nameTour.parentElement.childNodes[2].innerHTML = ''
+                    idTour.parentElement.childNodes[2].innerHTML = ''
+                    selectTour.parentElement.childNodes[3].innerHTML = ''
+                    // quantity.parentElement.childNodes[4].innerHTML = ''
+                }
+
+                if (nameTour.value.length <= 10) {
+                    nameTour.parentElement.childNodes[2].innerHTML = 'Tên tour không được để trống và phải trên 10 kí tự'
+                } else {
+                    nameTour.parentElement.childNodes[2].innerHTML = ''
+                }
+                object = {
+                    nameTour: nameTour.value,
+                    idTour: idTour.value,
+                    selectTour: selectTour.value,
+                    quantity: quantity.value,
+                    gender:getSelectedValue.value,
+
+                }
+                arr.push(object)
+
+                for (let index = 0; index < arr.length; index++) {
+                    show.innerHTML += `<tr>
+                        <th>${arr[index].nameTour}</th>
+                        <th>${arr[index].idTour}</th>
+                        <th>${arr[index].selectTour == '1' ? 'Việt Nam' : 'Thái Lan'}</th>
+                        <th>${arr[index].gender == '1' ? 'Nam' : 'Nữ'}</th>
+                        <th>${arr[index].quantity}</th>
+                        <th><button>Xóa</button></th>
+                    </tr>
+            `
+                }
+
+
+            }
+
+    </script>
+</body>
+
+</html>

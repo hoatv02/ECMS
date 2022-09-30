@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: auto;
+            max-width: 500px;
+        }
+        .showErroMessage{
+            color:red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <form action="" id="FormLogin">
+        <div class="showErroMessage"></div>
+        <input type="text" name="" id="userName" placeholder="Tên khách hàng"><br>
+        <input type="text" name="" id="numberPhone" placeholder="Số điện thoại"><br>
+        <input type="text" name="" id="productName" placeholder="Tên sản phẩm"><br>
+        <input type="text" name="" id="prices" placeholder="Giá"><br>
+        <input type="text" name="" id="quantity" placeholder="Số lượng"><br>
+        <input type="submit" value="Đặt mua">
+        
+    </form>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Tên khách hàng</th>
+                <th>Số điẹn thoại</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody id="showProduct">
+          
+        </tbody>
+    </table>
+<button id="deletes">Xóa</button>
+    <script src="mains.js"></script>
+    <script>
+        var FormLogin=document.querySelector('#FormLogin');
+var showErroMessage = document.querySelector('.showErroMessage');
+var userName = document.querySelector('#userName');
+var numberPhone = document.querySelector('#numberPhone');
+var showPoduct = document.querySelector('#showProduct');
+var productName = document.querySelector('#productName');
+var prices = document.querySelector('#prices');
+var quantity = document.querySelector('#quantity');
+function checkInput(element){
+    if(element.value==''){
+        return false;
+    }
+    return true;
+}
+function checkDk(elements){
+    if(elements.value.length > 5){
+        return false;
+    }
+    return true;
+}
+function checkAp(elementss){
+    if(isNaN(elementss.value)){
+        return false;
+    }
+    return true;
+}
+function checkSD(elementsss){
+    if(elementsss.value <0){
+        return false;
+    }
+    return true;
+}
+
+
+function erroMessage(message){
+    showErroMessage.innerHTML = message;
+}
+
+
+function validate(){
+    if(!checkInput(userName)){
+        erroMessage('Không được để trống');
+        return false;
+    }else if(checkDk(userName)){
+        erroMessage('Vui lòng nhập trên 5 kí tự');
+        return false;
+    }else{
+        erroMessage('');
+    }
+    if(!checkInput(numberPhone)){
+        erroMessage('SDT Không được để trống');
+        return false;
+    }else if(!checkAp(numberPhone)){
+        erroMessage('Phải nhập số !!');
+        return false;
+    }else{
+        erroMessage('');
+    }
+    if(!checkInput(productName)){
+        erroMessage('Không để trống tên');
+        return false;
+    }else if(!checkDk(productName)){
+        erroMessage('Vui lòng nhập trên 5 kí tự');
+        return false;
+    }else{
+        erroMessage('');
+    }
+    if(!checkInput(prices)){
+        erroMessage('Không được đêr trống giá');
+        return false;
+    }else if(!checkSD(prices)){
+        erroMessage('Giá phải là số dương');
+        return false;
+    }else{
+        erroMessage('');
+    }
+    if(!checkInput(quantity)){
+        erroMessage('Không để trống giá');
+        return false;
+    }else if(!checkSD(quantity)){
+        erroMessage('Giá phải là số dương');
+        return false;
+    }else if(!checkAp(quantity)){
+        erroMessage('Phỉa nhập số');
+        return false;
+    }else{
+        erroMessage('');
+    }
+    return true;
+}
+
+var products=[];
+var newProduct;
+FormLogin.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    if(validate()){
+        newProduct = {
+            userName : userName.value,
+            numberPhone : numberPhone.value,
+            productName : productName.value,
+            prices : prices.value,
+            quantity : quantity.value
+        };
+        products.push(newProduct);
+        showPoduct.innerHTML='';
+        for(i=0;i<products.length;i++){
+            showPoduct.innerHTML+=`
+            <tr>
+                <td>${products[i].userName}</td>
+                <td>${products[i].numberPhone}</td>
+                <td>${products[i].productName}</td>
+                <td>${products[i].prices}</td>
+                <td>${products[i].quantity}</td>
+                <td>${products[i].prices * products[i].quantity}</td>
+            </tr>
+            `
+        }
+    }
+});
+// var deletes = document.querySelector('#delete');
+// deletes.button = function(e){
+//     e.preventDefault();
+//     newProduct.remove();
+// }
+    </script>
+</body>
+</html>

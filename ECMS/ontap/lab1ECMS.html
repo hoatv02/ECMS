@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+</head>
+
+<body>
+    <button onclick="addProduct()">Thêm sản phẩm</button>
+    <button onclick="deleteProduct()">Xóa sản phẩm</button>
+    <button onclick="updateProduct()">Cập nhật sản phẩm</button>
+    <button onclick="removeProducts()">Xóa tất cả sản phẩm</button>
+    <script>
+        const productList = [
+            { id: 1, name: "lamborghini" },
+            { id: 2, name: "ford" },
+            { id: 3, name: "audi" },
+            { id: 4, name: "mercedes" }
+        ];
+        const isRequired = (data) => {
+            return data !== "";
+        };
+
+        const checkLength = (data) => {
+            return data.length >= 5;
+        };
+
+        const render = (data) => {
+            if (Array.isArray(data)) {
+                if (data.length === 0) {
+                    console.log("Không có tên sản phẩm để hiển thị !");
+                    return;
+                }
+                data.forEach((item, index) => (item.id = index + 1));
+                console.table(data);
+            }
+        };
+       
+        render(productList);
+
+        const addProduct = () => {
+            const newProduct = prompt("Tên sản phẩm : ");
+
+            if (isRequired(newProduct) === false) {
+                alert("Vui lòng nhập tên sản phẩm!");
+                return;
+            }
+            if (checkLength(newProduct) === false) {
+                alert("Độ dài sản phẩm phải trên 5 kí tự");
+                return;
+            }
+            const checkTheProducts = productList.find(
+                (item) => newProduct.trim().toLowerCase() == item.name.trim().toLowerCase()
+            );
+            if (checkTheProducts) {
+                alert("Sản phẩm đã tồn tại!");
+                return;
+            }
+            productList.push({
+                name: newProduct
+            });
+            alert("Thêm sản phẩm thành công!");
+            console.clear();
+            render(productList);
+        };
+
+        const updateProduct = () => {
+            const productId = prompt("Product id:");
+            const product = productList.find((item) => productId == item.id);
+            if (!product) {
+                alert("Sản phẩm không tồn tại!");
+                return;
+            }
+            const newProduct = prompt("Sản phẩm mới :");
+            product.name = newProduct;
+            alert("Cập nhật thành công");
+            console.clear();
+            render(productList);
+        };
+
+        const deleteProduct = () => {
+            const productId = prompt("Mã sản phẩm :");
+            const product = productList.find((item) => productId == item.id);
+            productList.splice(product, 1);
+            if (!product) {
+                alert("Sản phẩm không tồn tại!");
+                return;
+            }
+            alert("Xóa sản phẩm thành công !");
+            console.clear();
+            render(productList);
+        };
+
+        const removeProducts = () => {
+            while (productList.length > 0) {
+                productList.pop();
+            }
+            alert("Gỡ thành công sản phẩm !");
+            console.clear();
+            render(productList);
+        };
+
+    </script>
+</body>
+
+</html>

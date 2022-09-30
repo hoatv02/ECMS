@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .form-control {
+        margin: 12px;
+      }
+
+      .button {
+        border-top: 1px solid #000;
+        padding-top: 12px;
+      }
+
+      .form {
+        width: 320px;
+        margin: 0 auto;
+      }
+
+      h4 {
+        margin-left: 12px;
+      }
+      .hidden {
+        display: none;
+        user-select: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form action="" class="form">
+      <h4>Đặt hàng</h4>
+      <div class="form-control">
+        <label for="number">Số lượng</label>
+        <input type="text" id="number" />
+        <p class="notify"></p>
+      </div>
+      <div class="form-control">
+        <label for="product">Sản phẩm</label>
+        <input type="text" id="product" />
+        <p class="notify"></p>
+      </div>
+      <div class="form-control">
+        <label for="loai">Loại</label>
+        <select name="loai" id="loai">
+          <option value=""></option>
+          <option value="iphone">iphone</option>
+          <option value="samsung">samsung</option>
+          <option value="oppo">Oppo</option>
+        </select>
+        <p class="notify"></p>
+      </div>
+      <div class="form-control">
+        <label for="price">Đơn giá</label>
+        <input type="text" id="price" />
+        <p class="notify"></p>
+      </div>
+      <div class="form-control">
+        <span>Nơi nhận hàng</span>
+        <input
+          type="radio"
+          class="address"
+          value="noithanh"
+          name="address"
+          id="noithanh"
+        /><label for="noithanh">Nội thành</label>
+        <input
+          type="radio"
+          class="address"
+          value="ngoaithanh"
+          name="address"
+          id="ngoaithanh"
+        /><label for="ngoaithanh">Ngoại thành</label>
+        <p class="notify"></p>
+      </div>
+      <div class="form-control hidden">
+        <span>Phi vận chuyển</span>
+        <input
+          type="text"
+          disabled
+          class="ship"
+          name="ship"
+          id="noithanh"
+          value="10000"
+        />
+
+        <p class="notify"></p>
+      </div>
+      <div class="form-control button">
+        <button type="submit" id="button">Đặt mua</button>
+      </div>
+    </form>
+    <div class="render"></div>
+    <script>
+      const $ = document.querySelector.bind(document);
+      const $$ = document.querySelectorAll.bind(document);
+      const number = $("#number");
+      const product = $("#product");
+      const loai = $("#loai");
+      const price = $("#price");
+      const address = $$(".address");
+      const button = $("#button");
+      const form = $(".form");
+      const notify = $$(".notify");
+      const hidden = $(".hidden");
+      const render = $(".render");
+      const ship = $(".ship");
+      const isRequired = (value) => {
+        return value.trim() === "" || value === "" ? true : false;
+      };
+
+      let total = price.value * number.value + ship.value;
+
+      button.onclick = (e) => {
+        console.log([price.parentElement.childNodes[5]]);
+        e.preventDefault();
+        if (isRequired(price.value)) {
+          price.parentElement.childNodes[5].innerHTML =
+            "Vui lòng nhập giá tiền";
+          price.parentElement.childNodes[5].style.color = "red";
+        } else if (price.value < 0 || !/\d+/g.test(price.value)) {
+          price.parentElement.childNodes[5].innerHTML =
+            " Vui lòng nhập giá tiền là số dương";
+        } else {
+          price.parentElement.childNodes[5].innerHTML = "";
+        }
+        if (isRequired(number.value)) {
+          number.parentElement.childNodes[5].innerHTML =
+            "Vui lòng nhập số lượng";
+          number.parentElement.childNodes[5].style.color = "red";
+        } else if (number.value < 0 || !/\d+/g.test(number.value)) {
+          number.parentElement.childNodes[5].innerHTML =
+            " Số luọng là số dương";
+        } else {
+          number.parentElement.childNodes[5].innerHTML = "";
+        }
+        if (isRequired(product.value)) {
+          product.parentElement.childNodes[5].innerHTML =
+            "Vui lòng nhập giá tiền";
+          product.parentElement.childNodes[5].style.color = "red";
+        } else {
+          product.parentElement.childNodes[5].innerHTML = "";
+        }
+        if (isRequired(loai.value)) {
+          loai.parentElement.childNodes[5].innerHTML = "Vui lòng chọn loại";
+          loai.parentElement.childNodes[5].style.color = "red";
+        } else {
+          loai.parentElement.childNodes[5].innerHTML = "";
+        }
+        Array.from(address).forEach((item) => {
+          if (item.value === "ngoaithanh" && item.checked) {
+            hidden.style.display = "block";
+          } else {
+            hidden.style.display = "none";
+          }
+        });
+        render.innerHTML = `
+          <table border='1'>
+            <thead>
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>Loại</th>
+                    <th>Giá</th>
+                    <th>Nơi nhận hàng</th>
+                    <th>Phí vận chuyển</th>
+                    <th>Tổng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>${product.value}</td>
+                    <td>${loai.value}</td>
+                    <td>${price.value}</td>
+                    <td>${address.value}</td>
+                    <td>${ship.value || 0}</td>
+                    <td>${total}</td>
+                </tr>
+            </tbody>
+        </table>`;
+      };
+    </script>
+  </body>
+</html>

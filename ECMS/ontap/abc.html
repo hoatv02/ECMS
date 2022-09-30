@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+ <script>
+  function VanDongVien(maVanDongVien,hoTen,ngaySinh,giaiThuong) {
+    this.maVanDongVien = maVanDongVien,
+    this.hoTen = hoTen,
+    this.ngaySinh=ngaySinh,
+    this.giaiThuong = giaiThuong,
+    this.kiemTraDieuKien=function(){
+      const theNext = new Date(12/11/2002);
+      const age = theNext.getFullYear() - this.ngaySinh.getFullYear()
+      return age - theNext.getFullYear()
+
+    }
+  }
+  const abc = new abcd(
+    1,
+    'Trần Văn Hòa',
+    12/11/2002,
+    120000,
+  )
+  VanDongVien(abc);
+ </script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* #target {
+            width: 100px;
+            height: 100px;
+            background: rgb(148, 112, 112);
+        } */
+
+        /* #color{
+            display: block;
+            height:30px;
+            line-height: 30px;
+            margin-bottom: 20px;
+            width: 20px;
+        } */
+        .user_item {
+            color: green;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .form {
+            margin: 50px auto;
+        }
+
+        ul li {
+            list-style-type: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- <div id="target"></div>
+    <input type="text" id="txtInput" value="33691C">
+    <h3>Input text</h3> -->
+    <!-- <ul id="targets"></ul> -->
+    <!-- <form action="" class="form">
+        <div class="form-control">
+            <label for="">ID</label>
+            <input type="text" name="" id="addUserId" value="" placeholder="">
+            <div class="notify"></div>
+        </div>
+        <div class="form-control">
+            <label for="">Name</label>
+            <input type="text" name="" id="addUserText" value="" placeholder="">
+            <div class="notify"></div>
+
+        </div>
+        <div class="form-control">
+            <label for="">Gender</label>
+            <select name="" id="gender">
+                <option value=""></option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            <div class="notify"></div>
+
+        </div>
+        <div class="form-control">
+            <button type="button" id="addAction">Add</button>
+        </div>
+        <ul id="target"></ul>
+    </form> -->
+    <form class="convertAction">
+        <h3>String</h3>
+        <input type="text" id="text" />
+        <div>
+            <button type="submit">Convert</button>
+        </div>
+    </form>
+    <h3 id="outPut">FPT</h3>
+
+    <!-- ---------------- b6 ----------------- -->
+    <form class="checkAction">
+        <h3>Email</h3>
+        <input type="text" id="email" />
+        <div>
+            <button type="submit">Check</button>
+        </div>
+    </form>
+    <h3 id="outPut">Email</h3>
+    <script>
+        const $$ = document.querySelectorAll.bind(document)
+        const $ = document.querySelector.bind(document)
+
+        //Bài 1
+        // var target = document.getElementById("target");
+        // target.onmouseover = function (){
+        //     document.getElementById("target").style = ("background:red;");
+        // }
+        // target.onmouseout = function (){
+        //     document.getElementById("target").style = ("background:blue;");
+        // }
+        //Bài 2
+        // var h3Text = document.querySelector("h3")
+        // var txtInput = document.querySelector("#txtInput")
+        // txtInput.onkeyup = function() {
+        // txtInput.value = txtInput.value.toUpperCase()
+        // }
+        //Bài 3 
+        // var users = [
+        //     {
+        //         id: 1, name: 'Jame Smith', gender: 1
+        //     },
+        //     {
+        //         id: 2, name: 'Isla Brown', gender: 2
+        //     },
+        //     {
+        //         id: 3, name: 'Amelia Davies', gender: 2
+        //     },
+        //     {
+        //         id: 4, name: 'Jacob Evans', gender: 1
+        //     },
+
+        // ]
+        // const userItem = $$['.user_item']
+        // var targets = document.getElementById("targets")
+        // targets.innerHTML = users.map((user, index) => {
+        //     return `<li class='user_item'>${user.id} - ${user.name} - ${user.gender}</li>`
+        // })
+        // Bài 4
+        // const users = [{
+        //     id: 1, name: 'Jame Smith', gender: 1
+        // },
+        // {
+        //     id: 2, name: 'Isla Brown', gender: 2
+        // },
+        // {
+        //     id: 3, name: 'Amelia Davies', gender: 2
+        // },
+        // {
+        //     id: 4, name: 'Jacob Evans', gender: 1
+        // },
+        // ]
+        // const target = document.querySelector('#target')
+        // const button = document.querySelector('#addAction')
+        // const addUserId = $('#addUserId')
+        // const addUserText = $('#addUserText')
+        // const gender = $('#gender')
+        // const notify = $$('.notify')
+        // const isRequired = (value) => {
+        //     return value.trim() === "" || value === "" ? true : false;
+        // };
+
+        // const render = ()=>{
+        //     target.innerHTML = users.map((user) => {
+        //         return (
+        //             `
+        //                 <li border='1'>ID :${user.id}</li>
+        //                 <li>NAME :${user.name}</li>
+        //                 <li>GENDER :${user.gender}</li>
+        //              `
+        //         )
+        //     }).join(' ');
+        // }
+        // button.onclick = (e) => {
+        //     console.log([addUserId.parentElement.childNodes[5]])
+        //     e.preventDefault();
+        //     if (isRequired(addUserId.value)) {
+        //         addUserId.parentElement.childNodes[5].innerHTML = 'Vui lòng nhập ID user';
+        //         addUserId.parentElement.childNodes[5].style.color = 'red'
+        //     } else if (addUserId.value < 0 || !/\d+/g.test(addUserId.value)) {
+        //         addUserId.parentElement.childNodes[5].innerHTML = 'Vui lòng nhập ID là số dương';
+        //     } else {
+        //         addUserId.parentElement.childNodes[5].innerHTML = '';
+        //     }
+
+        //     if (isRequired(addUserText.value)) {
+        //         addUserText.parentElement.childNodes[5].innerHTML = 'Vui lòng nhập tên';
+        //         addUserText.parentElement.childNodes[5].style.color = 'red'
+        //     } else {
+        //         addUserText.parentElement.childNodes[5].innerHTML = '';
+        //     }
+        //     if (isRequired(gender.value)) {
+        //         gender.parentElement.childNodes[5].innerHTML = 'Vui chọn giới tính';
+        //         gender.parentElement.childNodes[5].style.color = 'red'
+        //     } else {
+        //         gender.parentElement.childNodes[5].innerHTML = '';
+        //     }
+        //     users.push({
+        //         id:addUserId.value, 
+        //         name: addUserText.value,
+        //         gender: gender.value
+        //     });
+        //     render()
+        // }
+        // render()
+
+        //Bài 5
+        const button = $('#button')
+        const string = $('#string')
+        const notify = $('.notify')
+
+
+        function titleCase(string) {
+            let sentence = string.toLowerCase().split(" ");
+
+            for (var i = 0; i < sentence.length; i++) {
+                sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(' ' + 1);
+            }
+            return sentence.join(" ");
+        }
+        const isRequired = (value) => {
+            return value.trim() === "" || value === "" ? true : false;
+        };
+        var convertAction = document.querySelector(".convertAction");
+        var outPut = document.getElementById("outPut");
+        convertAction.onsubmit = function (event) {
+            event.preventDefault();
+            var valInput = document.getElementById("text").value;
+            outPut.innerHTML = camelCase(valInput.replace(/[^\w\s]/gi, ""));
+        };
+
+        function camelCase(str) {
+            return str
+                .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+                    return index == 0 ? word.toLowerCase() : word.toUpperCase();
+                })
+                .replace(/\s+/g, "");
+        }
+        //Bài 6 
+        var checkAction = document.querySelector(".checkAction");
+        var outPut = document.getElementById("outPut");
+        checkAction.onsubmit = function (event) {
+            var regexEmail = /^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/;
+            event.preventDefault();
+            var email = document.getElementById("email").value;
+            if (b6Email.length < 2) return;
+            else if (!regexEmail.test(email)) return 'Vui lòng nhập đúng email';
+            else outPut.innerHTML = email;
+        };
+    </script>
+</body>
+
+</html>

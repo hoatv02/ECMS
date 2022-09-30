@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img id="image1" class="image" src="https://tse4.mm.bing.net/th?id=OIP.TF9LZU05fb84hDnBRvwqQwEsD2&pid=Api&P=0" alt="">
+    <script>
+        function getImage(url,cb) {
+            fetch(url).then(function(res) {
+                cb(res)
+            })
+        }
+        function renderImage(selector,value){
+            document.querySelector(selector).src=value
+        }
+
+        getImage('https://tse4.mm.bing.net/th?id=OIP.TF9LZU05fb84hDnBRvwqQwEsD2&pid=Api&P=0'),function(res) {
+            renderImage("#image1",res.url)
+        }
+    </script>
+</body>
+</html>

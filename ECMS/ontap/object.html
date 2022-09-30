@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        .product img {
+            width: 100%;
+            border-radius: 15px;
+            height: 200px;
+        }
+
+        .title {
+            padding: 0 200px;
+            text-align: center;
+        }
+
+        p {
+            margin: 5px;
+        }
+
+        .product {
+            padding: 0 100px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 10px;
+        }
+
+        .rowTwo {
+            display: inline-flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .rowOne p {
+            color: red;
+            font-weight: 600;
+        }
+
+        .category {
+            display: inline-flex;
+            width: 100%;
+            padding: 0 100px;
+            justify-content: space-between;
+
+        }
+
+        .view {
+            margin-right: 200px !important;
+            padding: 5px;
+            border: 1px solid rgb(255, 0, 0);
+            color:red;
+        }
+
+        .products {
+            display: inline;
+        }
+
+        .products img {
+            width: 120px;
+            border-radius: 15px;
+        }
+
+        .list {
+            margin-left: 60px;
+            display: inline;
+        }
+
+
+        .list-group p{
+            font-weight: 600;
+        }
+
+        ul li {
+            list-style: none;
+            width: 60px;
+            margin-top: 10px;
+            display: inline-flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="title">
+            <h2>Our Popular Dishes</h2>
+            <p>Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqut enim ad minim </p>
+        </div>
+        <div class="product"></div>
+        <div class="category">
+            <div class="">
+                <h4>Categories</h4>
+            </div>
+            <div class="view">
+                <h4>View All Categories</h4>
+            </div>
+
+        </div>
+        <div class="products">
+        </div>
+    </div>
+    <script>
+        const $ = document.querySelector.bind(document)
+        const product = $('.product')
+        const products = $('.products')
+
+        const ListProduct = [
+            {
+                id: 1,
+                name: "Big and Juicy Wagyu Beef Cheeseburger",
+                price: 30,
+                desc: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.",
+                image: "https://tse4.mm.bing.net/th?id=OIP.MXNQODXgIdM1-yHfU_Np-gHaE8&pid=Api&P=0",
+                category: 1
+            },
+            {
+                id: 2,
+                name: "Fresh Lime Roasted Salmon",
+                price: 10,
+                desc: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.",
+                image: "https://tse4.explicit.bing.net/th?id=OIP.DnTA1lo0-VKlNFLJ5WktpgHaGF&pid=Api&P=0",
+                category: 1
+            },
+            {
+                id: 3,
+                name: "The Best Easy One Pot Chicken and Rice",
+                price: 20,
+                desc: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.",
+                image: "https://tse4.explicit.bing.net/th?id=OIP.DnTA1lo0-VKlNFLJ5WktpgHaGF&pid=Api&P=0",
+                category: 3
+            },
+            {
+                id: 4,
+                name: "Fresh and Healthy Mixed Mayonnaise ",
+                price: 50,
+                desc: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.",
+                image: "https://tse4.explicit.bing.net/th?id=OIP.DnTA1lo0-VKlNFLJ5WktpgHaGF&pid=Api&P=0",
+                category: 4
+            },
+            {
+                id: 5,
+                name: "The Creamiest Creamy Chicken",
+                price: 60,
+                desc: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.",
+                image: "https://tse4.explicit.bing.net/th?id=OIP.DnTA1lo0-VKlNFLJ5WktpgHaGF&pid=Api&P=0",
+                category: 5
+            },
+            {
+                id: 6,
+                name: "Fruity Pancake with Orange & Blueberry",
+                price: 15,
+                desc: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.",
+                image: "https://tse4.explicit.bing.net/th?id=OIP.DnTA1lo0-VKlNFLJ5WktpgHaGF&pid=Api&P=0",
+                category: 6
+            }
+        ]
+
+        const ListCategory = [
+            {
+                id: 1,
+                name: "Breakfast",
+                image: "https://tse4.mm.bing.net/th?id=OIP.kp-e3qRPK5_UiOVkA5F5nwHaEq&pid=Api&P=0"
+            },
+            {
+                id: 2,
+                name: "Vegan",
+                image: "https://tse4.mm.bing.net/th?id=OIP.kp-e3qRPK5_UiOVkA5F5nwHaEq&pid=Api&P=0"
+            },
+            {
+                id: 3,
+                name: "Meat",
+                image: "https://tse4.mm.bing.net/th?id=OIP.kp-e3qRPK5_UiOVkA5F5nwHaEq&pid=Api&P=0"
+            },
+            {
+                id: 4,
+                name: "Dessert",
+                image: "https://tse4.mm.bing.net/th?id=OIP.kp-e3qRPK5_UiOVkA5F5nwHaEq&pid=Api&P=0"
+            },
+            {
+                id: 5,
+                name: "Lunch",
+                image: "https://tse4.mm.bing.net/th?id=OIP.kp-e3qRPK5_UiOVkA5F5nwHaEq&pid=Api&P=0"
+            },
+            {
+                id: 6,
+                name: "Chocolate",
+                image: "https://tse4.mm.bing.net/th?id=OIP.kp-e3qRPK5_UiOVkA5F5nwHaEq&pid=Api&P=0"
+            }
+        ]
+        for (const iterator of ListProduct) {
+            product.innerHTML += `<div class="detailProducts">
+                    <div class="rowOne">
+                        <img src="${iterator.image}" alt="">
+                        <p>${iterator.name}</p>
+                    </div>
+                    <div class="rowTwo">
+                        <div class="time">
+                            <p>Giá : ${iterator.price}</p>
+                        </div>
+                        <div class="dish">
+                            <p>Category : ${iterator.category}</p>
+                        </div>  
+                    </div>
+                </div>`
+        }
+        for (const productss of ListCategory) {
+            products.innerHTML += `<ul class='list'>
+                <li>
+                        <div class='list-group'>
+                            <img src="${productss.image}" alt=""> 
+                            <p>${productss.name}</p>
+                        </div>
+
+                </li>
+                
+            </ul>
+            `
+        }
+
+
+        /*
+            map(function(){})
+            arrow function
+        */ 
+    </script>
+</body>
+
+</html>
